@@ -1,0 +1,18 @@
+# Versão 1: Verificando convertendo para string (modo facil)
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        s = str(x)
+        return s == s[::-1]
+    
+# Versão 2: Verificando sem converter para string (modo dificil)
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        if x < 0: return False
+        if x == 0: return True
+        original = x
+        reverse = 0
+        while x > 0:
+            reverse = reverse * 10 + x % 10
+            x //= 10
+        return original == reverse
+    
