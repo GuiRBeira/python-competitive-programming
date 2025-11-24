@@ -1,0 +1,40 @@
+# 20. Valid Parentheses
+# Versão 1: Usando pilha para verificar a validade dos parênteses 
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+# Fiz essa versão sozinho, porém ainda pode ser melhorada
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = []
+        comeco = ['(', '[', '{']
+        fim = [')', ']', '}']
+        for char in s:
+            if char in comeco:
+                stack.append(fim[comeco.index(char)])
+            elif char in fim:
+                if stack:
+                    if char == stack[-1]:
+                        stack.pop()
+                    else: return False
+                else: return False
+        return (len(stack) == 0)
+    
+# Versão 2: Usando dicionário para mapear os parênteses
+# Time Complexity: O(1)
+# Space Complexity: O(1)
+class Solution:
+    def isValid(self, s: str) -> bool:
+        # Mapeamento direto: Fechamento -> Abertura
+        # Isso elimina a necessidade de duas listas e do .index()
+        mapa = {')': '(', ']': '[', '}': '{'}
+        stack = []
+
+        for char in s:
+            if char in mapa:
+                top_element = stack.pop() if stack else '#'
+                if mapa[char] != top_element:
+                    return False
+            else:
+                stack.append(char)
+        return not stack
