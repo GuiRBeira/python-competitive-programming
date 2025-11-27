@@ -1,6 +1,6 @@
 # 9. Palindrome Number
 # Versão 1: Verificando convertendo para string (modo facil)
-class Solution:
+class Solution: # pyright: ignore[reportRedeclaration]
     def isPalindrome(self, x: int) -> bool:
         s = str(x)
         return s == s[::-1]
